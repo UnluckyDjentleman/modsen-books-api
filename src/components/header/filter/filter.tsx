@@ -1,5 +1,4 @@
-import React, { ChangeEvent, useCallback } from 'react'
-import {useState} from 'react'
+import {useCallback } from 'react'
 import FilterElement from '../../../constants/filterElement'
 
 export default function Filter({info, onSelection}:{info: FilterElement, onSelection: Function}){

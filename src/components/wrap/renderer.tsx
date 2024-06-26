@@ -1,9 +1,6 @@
-import React, { MouseEventHandler, useCallback } from 'react'
+import { MouseEventHandler} from 'react'
 import CardBook from '../cards/card'
-import {useState} from 'react'
-import photo from '../../assets/book_placeholder.png'
 import BookSearch from '../../constants/bookSearch'
-import Book from '../../constants/book'
 import LoadMore from './loadMore/loadMore'
 
 export function RenderBooks({books, clickCount, getId}:{

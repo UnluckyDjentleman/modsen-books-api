@@ -1,6 +1,3 @@
-import React, { ChangeEvent, useCallback } from 'react'
-import {useState} from 'react'
-import BookSearch from '../../constants/bookSearch'
 import Book from '../../constants/book'
 import photo from '../../assets/book_placeholder.png' 
 

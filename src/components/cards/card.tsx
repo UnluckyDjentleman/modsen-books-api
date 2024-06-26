@@ -1,9 +1,6 @@
-import React, { MouseEventHandler, useCallback } from 'react'
-import {useState} from 'react'
 import { useNavigate } from 'react-router';
 import Book from '../../constants/book'
 import photo from '../../assets/book_placeholder.png'
-import BookSearch from '../../constants/bookSearch'
 
 export default function CardBook({bookInfo, bookId, onPick}:{bookInfo:Book, bookId: string, onPick: Function}){
 

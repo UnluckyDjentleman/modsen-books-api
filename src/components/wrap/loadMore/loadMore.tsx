@@ -1,4 +1,4 @@
-import React, { MouseEventHandler } from 'react'
+import { MouseEventHandler } from 'react'
 
 export default function LoadMore({clicker}:{clicker: MouseEventHandler<HTMLButtonElement>|undefined}){
 

@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { HashRouter, Routes, Route, BrowserRouter } from 'react-router-dom'
+import { useState} from 'react'
+import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import './App.css'
 import './assets/bootstrap.css'
 import BooksPage from './pages/renderBooks'
