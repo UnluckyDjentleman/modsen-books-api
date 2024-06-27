@@ -10,7 +10,7 @@ export default function Filter({info, onSelection}:{info: FilterElement, onSelec
         <select className="selectpicker" onChange={(e)=>{Selector(e.target.value)}}>
             {
                 info.items&&info.items.map((el)=>(
-                    <option value={el!=='all'?el:''}>{el}</option>
+                    <option value={el!=='all'?el:""}>{el}</option>
                 ))
             }
         </select>

@@ -25,6 +25,7 @@ export default function BooksPage({order, searchInput, count, setCount, id}:{ord
 
     useEffect(()=>{
       BooksAPI.GetBooks(searchInput.search,count,order).then(result=>{
+        console.log(result.bookSearchRes)
         if(result.error===undefined){
           setBooks(count!==0?{bookSearchRes: [...books.bookSearchRes, ...result.bookSearchRes], totalItems: result.totalItems, error:result.error}:result)
           setFound(result.totalItems);

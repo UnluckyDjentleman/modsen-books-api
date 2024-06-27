@@ -5,7 +5,7 @@ export default function SearchBar({onSubmitSearch}:{onSubmitSearch:Function}){
     const sendReqByEnter=(e:React.KeyboardEvent<HTMLInputElement>)=>{
         console.log("Value:"+searchText);
         if (e.key === 'Enter') {
-            onSubmitSearch(searchText);
+            onSubmitSearch({search: searchText});
         } 
     }
     const Submitter=useCallback(()=>{

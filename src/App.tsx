@@ -11,18 +11,18 @@ function App() {
   const [searchInput, setSearchInput]=useState<SearchInput>({search: ""});
   const [id, setId]=useState<string>("");
   const [filter, setFilter]=useState<string|undefined>()
-  const [cat, setCat]=useState<string|undefined>()
+  const [cat, setCat]=useState<string>("")
   const [count, setCount]=useState(0);
 
   const addCategory=(category:string)=>{
     setCount(0);
-    console.log("Category:"+category);
-    setSearchInput({search: 
-        searchInput.search.toString().includes(category)===false?
-        searchInput.search.toString().replace("+subject:"+cat, "+subject:"+category):
-        searchInput.search+"+subject:"+category
-    })
+    let xd=searchInput.search.includes("+subject:"+cat)?
+    searchInput.search.replace("+subject:"+cat,"+subject:"+category):
+    searchInput.search+"+subject:"+category
+    console.log(xd);
+    setSearchInput({search: category!==''?xd:xd.replace("+subject:"+category,'')})
     setCat(category);
+    console.log(cat);
   }
 
   const setOrder=(orderBy: string)=>{
