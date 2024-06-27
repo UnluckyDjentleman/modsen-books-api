@@ -38,12 +38,14 @@ function App() {
   return(
     <>
     <Header setSearchInput={setQ} setOrder={setOrder} setCategory={addCategory}></Header>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<BooksPage order={filter} searchInput={searchInput} count={count} setCount={setCount} id={setId}/>} />
-        <Route path="/book" element={<BookInfoPage id={id}></BookInfoPage>}></Route>
-      </Routes>
-    </BrowserRouter>
+    <main className='container'>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<BooksPage order={filter} searchInput={searchInput} count={count} setCount={setCount} id={setId}/>} />
+          <Route path="/book" element={<BookInfoPage id={id}></BookInfoPage>}></Route>
+        </Routes>
+      </BrowserRouter>
+    </main>
     </>
   )
 }

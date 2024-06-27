@@ -10,13 +10,17 @@ export function RenderBooks({books, clickCount, getId}:{
 })
 {
     return(
-        <div className="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4">
+      <>
+        <div className="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
           {books&&books.map((elem)=>(
-            <div className="col mt-4">
+            <div className="col mt-4 mb-4">
               <CardBook bookInfo={elem.volumeInfo} key={elem.id} bookId={elem.id} onPick={getId}></CardBook>
             </div>
           ))}
+        </div>
+        <div className="d-flex justify-content-center">
           <LoadMore clicker={clickCount}></LoadMore>
-      </div>
+        </div>
+      </>
     )
 }
