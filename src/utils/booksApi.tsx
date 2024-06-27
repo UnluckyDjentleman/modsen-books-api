@@ -14,7 +14,7 @@ export default class BooksAPI{
                 key: 'AIzaSyBRKOSka7VWVxHO-yt3GAiG9GdcideKCSQ' 
             }
         })
-        console.log(resp);
+        console.log("STATUS:"+resp);
         return resp.status===200?{bookSearchRes: resp.data.items, totalItems: resp.data.totalItems, error:undefined}:{bookSearchRes: [], totalItems: 0, error: resp.data.response.data.error};
     }
 

@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-
+import {FaSearch} from "@react-icons/all-files/fa/FaSearch"
 export default function SearchBar({onSubmitSearch}:{onSubmitSearch:Function}){
     let searchText=""
     const sendReqByEnter=(e:React.KeyboardEvent<HTMLInputElement>)=>{
@@ -22,7 +22,7 @@ export default function SearchBar({onSubmitSearch}:{onSubmitSearch:Function}){
                 onKeyUp={sendReqByEnter}></input>
                 </div>
                 <button type="button" className="btn btn-primary" data-mdb-ripple-init onClick={Submitter}>
-                    <i className="fas fa-search"></i>
+                    <FaSearch></FaSearch>
                 </button>
             </div>
         </>
