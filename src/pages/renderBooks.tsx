@@ -7,6 +7,7 @@ import { useCallback, useRef } from 'react';
 import BookSearchResult from '../constants/types/bookSearchResult';
 import LoadMore from '../components/wrap/loadMore/loadMore';
 import { changeStartIndex } from '../store/reducers/searchInfoReducer';
+import SearchInput from '../constants/types/search';
 
 export default function BooksPage() {
 
@@ -14,6 +15,7 @@ export default function BooksPage() {
     const searchInformation=useAppSelector((state)=>state.searchInfo);
 
     const books = useRef<BookSearchResult>({ totalItems: 0, items: [] });
+    const defaultSearchInfo=useRef<SearchInput>(searchInformation)
 
     const onClickLoadMore=useCallback(()=>{
       dispatch(changeStartIndex({count: 30}))
@@ -33,6 +35,25 @@ export default function BooksPage() {
         totalItems: result.dataBooks.totalItems,
         items: [...books.current.items, ...result.dataBooks.items],
       };
+    }
+    else if(result.load==='Load...'){
+      if(defaultSearchInfo.current.query!==searchInformation.query||
+        defaultSearchInfo.current.category!==searchInformation.category||
+        defaultSearchInfo.current.order!==searchInformation.order||
+        defaultSearchInfo.current.startIndex!==searchInformation.startIndex){
+          books.current={
+            totalItems: books.current.totalItems,
+            items:[]
+          }
+          defaultSearchInfo.current=searchInformation
+        }
+      else{
+        books.current={
+          totalItems: result.dataBooks.totalItems,
+          items:books.current.items
+        }
+        defaultSearchInfo.current=searchInformation
+      }
     }
 
     return (
