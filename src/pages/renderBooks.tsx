@@ -39,8 +39,7 @@ export default function BooksPage() {
     else if(result.load==='Load...'){
       if(defaultSearchInfo.current.query!==searchInformation.query||
         defaultSearchInfo.current.category!==searchInformation.category||
-        defaultSearchInfo.current.order!==searchInformation.order||
-        defaultSearchInfo.current.startIndex!==searchInformation.startIndex){
+        defaultSearchInfo.current.order!==searchInformation.order){
           books.current={
             totalItems: books.current.totalItems,
             items:[]
