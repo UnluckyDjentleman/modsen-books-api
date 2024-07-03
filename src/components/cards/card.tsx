@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router';
-import Book from '../../constants/types/book'
 import photo from '../../assets/book_placeholder.png'
 import { useCallback } from 'react';
 import BookSearch from '../../constants/types/bookSearch';
