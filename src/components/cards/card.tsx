@@ -1,26 +1,26 @@
 import { useNavigate } from 'react-router';
-import Book from '../../constants/book'
+import Book from '../../constants/types/book'
 import photo from '../../assets/book_placeholder.png'
+import { useCallback } from 'react';
+import BookSearch from '../../constants/types/bookSearch';
 
-export default function CardBook({bookInfo, bookId, onPick}:{bookInfo:Book, bookId: string, onPick: Function}){
+export default function CardBook({bookInfo, onPick}:{bookInfo:BookSearch, onPick: Function}){
+    const navigate=useNavigate();
 
-    const navigate=useNavigate()
-
-    const Picker=()=>{
-        console.log(bookId)
-        onPick(bookId);
-        navigate('/book');
-    }
+    const onPickTheBook=useCallback(()=>{
+        onPick(bookInfo);
+        navigate("/book");
+    },[onPick, bookInfo])
 
     return(
-        <div className="card" style={{width: '18rem'}} onClick={Picker}>
+        <div className="card hover-zoom" style={{width: '18rem'}} onClick={onPickTheBook}>
             <div className='card-header'>
-                <p className='card-text'>{bookInfo.categories&&bookInfo.categories.length >= 1 ? bookInfo.categories[0] : ''}</p>
+                <p className='card-text'>{bookInfo.volumeInfo.categories&&bookInfo.volumeInfo.categories.length >= 1 ? bookInfo.volumeInfo.categories[0] : ''}</p>
             </div>
             <div className='card-body'>
-                <img className="img-card-top" src={bookInfo.imageLinks===undefined?photo:bookInfo.imageLinks.smallThumbnail}></img>
-                <h4 className='card-title'>{bookInfo.title}</h4>
-                <p className='card-text'>{bookInfo.authors && bookInfo.authors.length >= 1 ? bookInfo.authors[0] : ''}</p>
+                <img className="img-card-top" src={bookInfo.volumeInfo.imageLinks===undefined?photo:bookInfo.volumeInfo.imageLinks.smallThumbnail}></img>
+                <h4 className='card-title'>{bookInfo.volumeInfo.title}</h4>
+                <p className='card-text'>{bookInfo.volumeInfo.authors && bookInfo.volumeInfo.authors.length >= 1 ? bookInfo.volumeInfo.authors[0] : ''}</p>
             </div>
         </div>
     )

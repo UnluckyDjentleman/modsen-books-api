@@ -1,52 +1,60 @@
-import { useState, useEffect } from 'react'
 import '../App.css'
 import '../assets/bootstrap.css'
-import BooksAPI from '../utils/booksApi';
-import {RenderBooks} from '../components/wrap/renderer'
-import Error from '../components/error/error'
-import SearchInput from '../constants/search'
-import BookSearchResult from '../constants/bookSearchResult'
+import RenderBooks from '../components/wrap/renderer'
+import useBooks from '../utils/hooks/useBooks';
+import {useAppDispatch, useAppSelector } from '../utils/hooks/hooksRedux';
+import { useCallback, useRef } from 'react';
+import BookSearchResult from '../constants/types/bookSearchResult';
+import LoadMore from '../components/wrap/loadMore/loadMore';
+import { changeStartIndex } from '../store/reducers/searchInfoReducer';
 
-export default function BooksPage({order, searchInput, count, setCount, id}:{order: string|undefined, searchInput: SearchInput, count: number, setCount: Function, id: Function}) {
-    const [error, setError]=useState<string>("")
-    const [found, setFound]=useState<number>(0)
-    const [books, setBooks]=useState<BookSearchResult>(
-      {
-        bookSearchRes: [],
-        totalItems: 0,
-        error: undefined
-      }
-    )
+export default function BooksPage() {
 
+    const dispatch=useAppDispatch();
+    const searchInformation=useAppSelector((state)=>state.searchInfo);
 
-    const loadMore=()=>{
-      setCount(count+1);
+    const books = useRef<BookSearchResult>({ totalItems: 0, items: [] });
+
+    const onClickLoadMore=useCallback(()=>{
+      dispatch(changeStartIndex({count: 30}))
+    },[dispatch, changeStartIndex])
+
+    console.log(JSON.stringify(searchInformation));
+
+    const result = useBooks({
+      query: searchInformation.query,
+      startIndex: searchInformation.startIndex,
+      order: searchInformation.order,
+      category: searchInformation.category
+    });
+
+    if(result.load===true){
+      books.current = {
+        totalItems: result.dataBooks.totalItems,
+        items: [...books.current.items, ...result.dataBooks.items],
+      };
     }
 
-    useEffect(()=>{
-      BooksAPI.GetBooks(searchInput.search,count,order).then(result=>{
-        console.log(result.bookSearchRes)
-        console.log(result.error)
-        if(result.error===undefined){
-          setBooks(count!==0?{bookSearchRes: [...books.bookSearchRes, ...result.bookSearchRes], totalItems: result.totalItems, error:result.error}:result)
-          setFound(result.totalItems);
-        }
-        else{
-          setError(result.error);
-        }
-      })
-    },[searchInput.search, count, order])
-  
-    console.log(books);
     return (
       <>
-        {
-          found!==0?<p>Found {found} elements</p>:<p>Cannot find anything!</p>
-        }
-        {
-          error&&<Error error={error}></Error>
-        }
-        <RenderBooks books={books.bookSearchRes} clickCount={loadMore} getId={id}></RenderBooks>
+      {
+        result.load==='Load...'&&<p>{result.load+" Please, wait for few seconds..."}</p>
+      }
+      {
+        result.load===false&&result.error&&<p>{result.error.message}</p>
+      }
+      {
+        result.load===true&&result.dataBooks.items&&
+        <>
+          <p>Found {result.dataBooks.totalItems} books</p>
+          <RenderBooks books={books.current.items}></RenderBooks>
+        </>
+      }
+      {
+        result.load===true&&result.dataBooks.items.length>=30&&<div className="d-flex justify-content-center">
+        <LoadMore clicker={onClickLoadMore}></LoadMore>
+      </div>
+      }
       </>
     )
 }

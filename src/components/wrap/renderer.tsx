@@ -1,25 +1,25 @@
-import { MouseEventHandler} from 'react'
+import { useCallback } from 'react'
 import CardBook from '../cards/card'
-import BookSearch from '../../constants/bookSearch'
-import LoadMore from './loadMore/loadMore'
+import BookSearch from '../../constants/types/bookSearch'
+import { useAppDispatch } from '../../utils/hooks/hooksRedux'
+import { setBook } from '../../store/reducers/bookReducer'
 
-export function RenderBooks({books, clickCount, getId}:{
-  books:BookSearch[], 
-  clickCount: MouseEventHandler<HTMLButtonElement>|undefined,
-  getId: Function
-})
+export default function RenderBooks({books}:{books: BookSearch[]})
 {
+    const dispatch=useAppDispatch();
+
+    const onPickTheBook=useCallback((selectedBook: BookSearch)=>{
+      dispatch(setBook(selectedBook))
+    },[setBook])
+
     return(
       <>
         <div className="row justify-content-center row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
           {books&&books.map((elem)=>(
             <div className="col mt-4 mb-4">
-              <CardBook bookInfo={elem.volumeInfo} key={elem.id} bookId={elem.id} onPick={getId}></CardBook>
+              <CardBook bookInfo={elem} key={elem.id} onPick={onPickTheBook}></CardBook>
             </div>
           ))}
-        </div>
-        <div className="d-flex justify-content-center">
-          <LoadMore clicker={clickCount}></LoadMore>
         </div>
       </>
     )

@@ -1,64 +1,14 @@
-import { useState, useEffect } from 'react'
 import '../App.css'
 import '../assets/bootstrap.css'
-import BooksAPI from '../utils/booksApi';
-import BookSearch from '../constants/bookSearch'
 import BookWithInfo from '../components/bookWithInfo/bookWithInfo'
+import BookSearch from '../constants/types/bookSearch'
 
-export default function BookInfoPage({id}:{id: string}) {
-    const [book, setBook]=useState<BookSearch>({
-        id:'',
-        etag:'',
-        selfLink:'',
-        volumeInfo: {
-            title: '',
-
-            imageLinks:  {
-                smallThumbnail: undefined,
-                thumbnail: undefined,
-                medium: undefined,
-                large: undefined,
-                extraLarge: undefined
-            },
-
-            authors: [],
-            
-            publisher: '',
-            publishedDate: new Date,
-            description: '',
-            pageCount: 0,
-
-            dimensions: {
-                height: '',
-                width: '',
-                thickness: ''
-            },
-
-            printType: '',
-            mainCategory: '',
-            categories: [],
-
-            averageRating: 0,
-            ractingsCount: 0,
-
-            contentVersion: '',
-            language: '',
-            infoLink: '',
-            canonicalVolumeLink: ''
-        }
-    })
-
-    useEffect(()=>{
-        BooksAPI.GetBook(id).then(result=>{
-            console.log("Id:"+id);
-            console.log("Result:"+JSON.stringify(result))
-            setBook(result);
-        })
-    },[]);
-
+export default function BookInfoPage({book}:{book: BookSearch|undefined}) {
     return (
       <>
-        <BookWithInfo bookInfo={book.volumeInfo}></BookWithInfo>
+      {
+        book&&<BookWithInfo volumeInfo={book.volumeInfo}/>
+      }
       </>
     )
 }

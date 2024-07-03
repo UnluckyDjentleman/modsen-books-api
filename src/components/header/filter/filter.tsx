@@ -1,13 +1,13 @@
 import {useCallback } from 'react'
-import FilterElement from '../../../constants/filterElement'
+import FilterElement from '../../../constants/types/filterElement'
 
 export default function Filter({info, onSelection}:{info: FilterElement, onSelection: Function}){
-    const Selector=useCallback((input:string)=>{
-        onSelection(input);
+    const onSelected=useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
+        onSelection(e.target.value);
     },[onSelection])
 
     return(
-        <select className="selectpicker" onChange={(e)=>{Selector(e.target.value)}}>
+        <select className="selectpicker" onChange={onSelected}>
             {
                 info.items&&info.items.map((el)=>(
                     <option value={el!=='all'?el:""}>{el}</option>

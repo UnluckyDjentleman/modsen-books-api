@@ -1,15 +1,13 @@
-import React, { useCallback } from "react";
+import { useCallback} from "react";
 import {FaSearch} from "@react-icons/all-files/fa/FaSearch"
-export default function SearchBar({onSubmitSearch}:{onSubmitSearch:Function}){
-    let searchText=""
+export default function SearchBar({onSubmitSearch,onInputText}:{onSubmitSearch:Function, onInputText: Function}){
     const sendReqByEnter=(e:React.KeyboardEvent<HTMLInputElement>)=>{
-        console.log("Value:"+searchText);
         if (e.key === 'Enter') {
-            onSubmitSearch({search: searchText});
+            onSubmitSearch();
         } 
     }
-    const Submitter=useCallback(()=>{
-        onSubmitSearch({search: searchText})
+    const onSubmitting=useCallback(()=>{
+        onSubmitSearch()
     },[onSubmitSearch])
     return (
         <>
@@ -18,10 +16,10 @@ export default function SearchBar({onSubmitSearch}:{onSubmitSearch:Function}){
                     <input type="search" id="form1" className="form-control"
                 placeholder="Enter the name of book"
                 name="input"
-                onChange={(e)=>{searchText=e.target.value}}
+                onChange={(e)=>{onInputText(e.currentTarget.value)}}
                 onKeyUp={sendReqByEnter}></input>
                 </div>
-                <button type="button" className="btn btn-primary" data-mdb-ripple-init onClick={Submitter}>
+                <button type="button" className="btn btn-primary" data-mdb-ripple-init onClick={onSubmitting}>
                     <FaSearch></FaSearch>
                 </button>
             </div>
