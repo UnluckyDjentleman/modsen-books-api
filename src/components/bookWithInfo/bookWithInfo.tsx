@@ -1,22 +1,30 @@
+import { useNavigate } from 'react-router';
 import Book from '../../constants/types/book'
-import photo from '../../assets/book_placeholder.png' 
+import photo from '../../assets/book_placeholder.png'
+
 
 export default function BookWithInfo({volumeInfo}:{volumeInfo:Book}){
+    const navigate=useNavigate();
+
+    const onReturn=()=>{
+        navigate("/");
+    }
     return(
         <>
         <div className="row justify-content-center row-cols-sm-2">
-            <div className="col">
-                <div className="h-100 d-flex align-items-center justify-content-center">
+            <div>
+                <div className="h-100 d-flex align-items-center justify-content-center bg-">
                     <img src={volumeInfo.imageLinks!==undefined?volumeInfo.imageLinks.thumbnail:photo}></img>
                 </div>
             </div>
-            <div className="col">
+            <div>
                 <p>{volumeInfo.categories!==undefined?volumeInfo.categories[0]:''}</p>
                 <h2>{volumeInfo.title}</h2>
                 <p>{volumeInfo.authors!==undefined?volumeInfo.authors.toString():''}</p>
                 <div className="border">
                     <p>{volumeInfo.description}</p>
                 </div>
+                <button onClick={onReturn} className="btn btn-link">Back</button>
             </div>
         </div>
         </>

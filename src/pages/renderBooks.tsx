@@ -57,18 +57,17 @@ export default function BooksPage() {
 
     return (
       <>
-      {
-        result.load==='Load...'&&<p>{result.load+" Please, wait for few seconds..."}</p>
-      }
+      <p>Found {result.dataBooks.totalItems} books</p>
       {
         result.load===false&&result.error&&<p>{result.error.message}</p>
       }
       {
-        result.load===true&&result.dataBooks.items&&
-        <>
-          <p>Found {result.dataBooks.totalItems} books</p>
-          <RenderBooks books={books.current.items}></RenderBooks>
-        </>
+        result.dataBooks.items&&(
+          <>
+            {result.load==='Load...'&&<p>{result.load+" Please, wait for few seconds..."}</p>}
+            <RenderBooks books={books.current.items}></RenderBooks>
+          </>
+        )
       }
       {
         result.load===true&&result.dataBooks.items.length>=30&&<div className="d-flex justify-content-center">
