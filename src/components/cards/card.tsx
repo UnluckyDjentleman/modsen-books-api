@@ -17,7 +17,9 @@ export default function CardBook({bookInfo, onPick}:{bookInfo:BookSearch, onPick
                 <p className='card-text'>{bookInfo.volumeInfo.categories&&bookInfo.volumeInfo.categories.length >= 1 ? bookInfo.volumeInfo.categories[0] : ''}</p>
             </div>
             <div className='card-body'>
-                <img className="img-card-top" src={bookInfo.volumeInfo.imageLinks===undefined?photo:bookInfo.volumeInfo.imageLinks.smallThumbnail}></img>
+                <div className="d-flex align-items-center justify-content-center" style={{height: '11rem'}}>
+                    <img className="img-card-top" src={bookInfo.volumeInfo.imageLinks===undefined?photo:bookInfo.volumeInfo.imageLinks.smallThumbnail}></img>
+                </div>
                 <div className="text-truncate">
                     <h4 className='card-title'>{bookInfo.volumeInfo.title}</h4>
                 </div>
