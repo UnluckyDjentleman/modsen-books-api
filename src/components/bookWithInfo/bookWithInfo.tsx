@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router';
-import Book from '../../constants/types/book'
+
 import photo from '../../assets/book_placeholder.png'
+import Book from '../../constants/types/book'
 
 
 export default function BookWithInfo({volumeInfo}:{volumeInfo:Book}){

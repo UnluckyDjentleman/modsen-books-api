@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import SearchInput from "../../constants/types/search";
 
 const initialState: SearchInput={query:"", order:"relevance", category:"", startIndex: 0}
@@ -14,7 +15,7 @@ export const searchInfoReducer=createSlice({
             state.startIndex=action.payload.startIndex
         },
         changeStartIndex:(state, action: PayloadAction<{count: number}>)=>{
-            state.startIndex+=action.payload.count
+            state.startIndex=action.payload.count
         }
     }
 })

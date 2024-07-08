@@ -1,8 +1,9 @@
 import { useCallback } from 'react'
-import CardBook from '../cards/card'
+
 import BookSearch from '../../constants/types/bookSearch'
-import { useAppDispatch } from '../../utils/hooks/hooksRedux'
 import { setBook } from '../../store/reducers/bookReducer'
+import { useAppDispatch } from '../../utils/hooks/hooksRedux'
+import CardBook from '../cards/card'
 
 export default function RenderBooks({books}:{books: BookSearch[]})
 {

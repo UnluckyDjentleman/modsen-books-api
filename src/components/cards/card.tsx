@@ -1,9 +1,10 @@
-import { useNavigate } from 'react-router';
-import photo from '../../assets/book_placeholder.png'
 import { useCallback } from 'react';
+import { useNavigate } from 'react-router';
+
+import photo from '../../assets/book_placeholder.png'
 import BookSearch from '../../constants/types/bookSearch';
 
-export default function CardBook({bookInfo, onPick}:{bookInfo:BookSearch, onPick: Function}){
+export default function CardBook({bookInfo, onPick}:{bookInfo:BookSearch, onPick: (bookInfo: BookSearch)=>void}){
     const navigate=useNavigate();
 
     const onPickTheBook=useCallback(()=>{

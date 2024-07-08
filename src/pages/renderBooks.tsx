@@ -1,15 +1,19 @@
 import '../App.css'
 import '../assets/bootstrap.css'
-import RenderBooks from '../components/wrap/renderer'
-import useBooks from '../utils/hooks/useBooks';
-import {useAppDispatch, useAppSelector } from '../utils/hooks/hooksRedux';
-import { useCallback, useRef } from 'react';
-import BookSearchResult from '../constants/types/bookSearchResult';
+
+import { useCallback, useRef, useState } from 'react';
+
 import LoadMore from '../components/wrap/loadMore/loadMore';
-import { changeStartIndex } from '../store/reducers/searchInfoReducer';
+import RenderBooks from '../components/wrap/renderer'
+import BookSearchResult from '../constants/types/bookSearchResult';
 import SearchInput from '../constants/types/search';
+import { changeStartIndex } from '../store/reducers/searchInfoReducer';
+import {useAppDispatch, useAppSelector } from '../utils/hooks/hooksRedux';
+import useBooks from '../utils/hooks/useBooks';
 
 export default function BooksPage() {
+
+    const [count, setCount]=useState(0)
 
     const dispatch=useAppDispatch();
     const searchInformation=useAppSelector((state)=>state.searchInfo);
@@ -18,10 +22,9 @@ export default function BooksPage() {
     const defaultSearchInfo=useRef<SearchInput>(searchInformation)
 
     const onClickLoadMore=useCallback(()=>{
-      dispatch(changeStartIndex({count: 30}))
-    },[dispatch, changeStartIndex])
-
-    console.log(JSON.stringify(searchInformation));
+      setCount(prev=>prev+1)
+      dispatch(changeStartIndex({count: count}));
+    },[dispatch, count])
 
     const result = useBooks({
       query: searchInformation.query,

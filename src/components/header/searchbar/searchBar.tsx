@@ -1,6 +1,6 @@
-import { useCallback} from "react";
 import {FaSearch} from "@react-icons/all-files/fa/FaSearch"
-export default function SearchBar({onSubmitSearch,onInputText}:{onSubmitSearch:Function, onInputText: Function}){
+import { useCallback} from "react";
+export default function SearchBar({onSubmitSearch,onInputText}:{onSubmitSearch:()=>void, onInputText: (value: string)=>void}){
     const sendReqByEnter=(e:React.KeyboardEvent<HTMLInputElement>)=>{
         if (e.key === 'Enter') {
             onSubmitSearch();

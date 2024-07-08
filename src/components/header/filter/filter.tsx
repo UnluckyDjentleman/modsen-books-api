@@ -1,9 +1,10 @@
 import {useCallback } from 'react'
+
 import FilterElement from '../../../constants/types/filterElement'
 
-export default function Filter({info, onSelection}:{info: FilterElement, onSelection: Function}){
+export default function Filter({info, onSelection}:{info: FilterElement, onSelection: (value: string)=>void}){
     const onSelected=useCallback((e: React.ChangeEvent<HTMLSelectElement>)=>{
-        onSelection(e.target.value);
+        if(onSelection) onSelection(e.target.value);
     },[onSelection])
 
     return(

@@ -1,9 +1,11 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom'
 import './App.css'
 import './assets/bootstrap.css'
-import BooksPage from './pages/renderBooks'
+
+import { BrowserRouter,Route, Routes } from 'react-router-dom'
+
 import Header from './components/header/header'
 import BookInfoPage from './pages/renderBook'
+import BooksPage from './pages/renderBooks'
 import { useAppSelector } from './utils/hooks/hooksRedux'
 
 function App() {
