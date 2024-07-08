@@ -1,15 +1,16 @@
-import Filter from "./filter/filter";
-import SearchBar from "./searchbar/searchBar";
+import { useCallback, useState } from 'react';
+
 import photo from '../../assets/background.png'
-import { useCallback, useRef } from 'react';
-import { useAppDispatch } from '../../utils/hooks/hooksRedux';
 import { setBook } from '../../store/reducers/bookReducer';
 import { setSearchInfo } from '../../store/reducers/searchInfoReducer';
+import { useAppDispatch } from '../../utils/hooks/hooksRedux';
+import Filter from "./filter/filter";
+import SearchBar from "./searchbar/searchBar";
 
 export default function Header(){
-    const search = useRef("");
-    const category = useRef("");
-    const order = useRef("relevance");
+    const [search,setSearch] = useState("");
+    const [category,setCategory] = useState("");
+    const [order,setOrder] = useState("relevance");
   
     const dispatch = useAppDispatch();
   
@@ -17,24 +18,24 @@ export default function Header(){
       dispatch(setBook(undefined));
       dispatch(
         setSearchInfo({
-          query: search.current,
-          category: category.current,
-          order: order.current,
+          query: search,
+          category: category,
+          order: order,
           startIndex: 0,
         })
       );
-    }, [dispatch, search, category, order]);
+    }, [search, category, order]);
   
     const onCategoryPicked = useCallback(
       (value: string) => {
-        category.current = value;
+        setCategory(value);
       },
       [category]
     );
   
     const onOrderPicked = useCallback(
       (value: string) => {
-        order.current = value;
+        setOrder(value)
       },
       [order]
     );
@@ -46,7 +47,7 @@ export default function Header(){
                 <div>
                     <div className="h-100 d-flex align-items-center justify-content-center">
                         <div className="d-flex justify-content-center">
-                            <SearchBar onSubmitSearch={onSubmitSearch} onInputText={(text:string)=>search.current=text}></SearchBar>
+                            <SearchBar onSubmitSearch={onSubmitSearch} onInputText={(text:string)=>setSearch(text)}></SearchBar>
                         </div>
                     </div>
                     <div className="h-100 d-flex align-items-center justify-content-center">
