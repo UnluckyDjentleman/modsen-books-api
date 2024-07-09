@@ -1,5 +1,5 @@
-interface FilterElement{
+interface FilterElement {
     items: string[]
 }
 
-export default FilterElement;
+export default FilterElement

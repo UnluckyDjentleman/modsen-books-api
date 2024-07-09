@@ -1,7 +1,7 @@
-import BookSearch from "./bookSearch"
+import BookSearch from './bookSearch'
 
-interface BookSearchResult{
-    items: BookSearch[];
+interface BookSearchResult {
+    items: BookSearch[]
     totalItems: number
 }
 

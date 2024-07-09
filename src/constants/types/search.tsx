@@ -1,8 +1,8 @@
-interface SearchInput{
-    query: string,
-    category: string,
-    order: string,
+interface SearchInput {
+    query: string
+    category: string
+    order: string
     startIndex: number
 }
 
-export default SearchInput;
+export default SearchInput
