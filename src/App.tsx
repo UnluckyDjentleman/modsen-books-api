@@ -9,29 +9,24 @@ import BooksPage from './pages/renderBooks'
 import { useAppSelector } from './utils/hooks/hooksRedux'
 
 function App() {
-    const chosenBook = useAppSelector(state => state.book.value)
 
-    const mainPage = '/'
-    const bookPage = '/book'
+  const chosenBook = useAppSelector((state) => state.book.value);
 
-    return (
-        <>
-            <Header></Header>
-            <main className="container">
-                <BrowserRouter>
-                    <Routes>
-                        <Route path={mainPage} element={<BooksPage />} />
-                        <Route
-                            path={bookPage}
-                            element={
-                                <BookInfoPage book={chosenBook}></BookInfoPage>
-                            }
-                        ></Route>
-                    </Routes>
-                </BrowserRouter>
-            </main>
-        </>
-    )
+  const mainPage = "/"
+  const bookPage = "/book"
+
+
+  return (
+    <>
+        <BrowserRouter>
+        <Header></Header>
+          <Routes>
+            <Route path={mainPage} element={<BooksPage />} />
+            <Route path={bookPage} element={<BookInfoPage book={chosenBook}></BookInfoPage>}></Route>
+          </Routes>
+        </BrowserRouter>
+    </>
+  )
 }
 
 export default App
